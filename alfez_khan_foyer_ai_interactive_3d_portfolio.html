@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALFEZ KHAN // FOYER AI — AI Video & Autonomous Lead Systems</title>
+  <meta name="description" content="Alfez Khan (Alfie) — Founder & Systems Architect at Foyer AI. Building 60-second AI avatar video engines and sub-10-second automated lead follow-up architectures for Real Estate Brokers & Financial Advisors." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Syne, Space Grotesk, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Three.js r128 CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#080809',
+            surface: '#101013',
+            surfaceHigh: '#16161B',
+            bone: '#F2EFE9',
+            titanium: '#84848F',
+            vermilion: '#FF3B1D',
+            acid: '#CCFF00',
+          },
+          fontFamily: {
+            syne: ['Syne', 'sans-serif'],
+            grotesk: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-obsidian: #080809;
+      --bg-surface: #101013;
+      --text-bone: #F2EFE9;
+      --text-titanium: #84848F;
+      --accent-vermilion: #FF3B1D;
+      --accent-acid: #CCFF00;
+      --hairline: rgba(242, 239, 233, 0.11);
+      --hairline-strong: rgba(242, 239, 233, 0.24);
+    }
+
+    * {
+      box-sizing: border-box;
+      selection-background-color: #FF3B1D;
+      selection-color: #080809;
+    }
+
+    ::selection {
+      background: #FF3B1D;
+      color: #080809;
+    }
+
+    body {
+      background-color: var(--bg-obsidian);
+      color: var(--text-bone);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Subtle tactile architectural blueprint & film grain overlay */
+    .bg-blueprint {
+      background-size: 64px 64px;
+      background-image: 
+        linear-gradient(to right, rgba(242, 239, 233, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(242, 239, 233, 0.035) 1px, transparent 1px);
+    }
+
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 90;
+      opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Structural 1px borders and corner crosshairs */
+    .hairline-border {
+      border: 1px solid var(--hairline);
+    }
+    .hairline-t { border-top: 1px solid var(--hairline); }
+    .hairline-b { border-bottom: 1px solid var(--hairline); }
+    .hairline-l { border-left: 1px solid var(--hairline); }
+    .hairline-r { border-right: 1px solid var(--hairline); }
+
+    .crosshair-box {
+      position: relative;
+    }
+    .crosshair-box::before,
+    .crosshair-box::after {
+      content: '+';
+      position: absolute;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1;
+      color: rgba(242, 239, 233, 0.38);
+      pointer-events: none;
+      z-index: 20;
+    }
+    .crosshair-box::before {
+      top: -6px;
+      left: -5px;
+    }
+    .crosshair-box::after {
+      bottom: -6px;
+      right: -5px;
+    }
+
+    /* Monumental display typography scaling */
+    .hero-display {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 0.94;
+    }
+
+    .section-display {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 0.98;
+    }
+
+    /* Marquee Ticker Animation */
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-ticker {
+      display: flex;
+      width: max-content;
+      animation: ticker 34s linear infinite;
+    }
+    .animate-ticker:hover {
+      animation-play-state: paused;
+    }
+
+    /* 3D Tilt Card Perspective & Specular Glare */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease;
+      will-change: transform;
+      position: relative;
+      overflow: hidden;
+    }
+    .tilt-card:hover {
+      border-color: rgba(255, 59, 29, 0.55);
+    }
+    .tilt-glare {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(550px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 59, 29, 0.11), transparent 45%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .tilt-card:hover .tilt-glare {
+      opacity: 1;
+    }
+
+    /* Custom Brutalist Range Sliders */
+    input[type="range"].brutalist-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: #1C1C22;
+      border: 1px solid rgba(242, 239, 233, 0.15);
+      outline: none;
+    }
+    input[type="range"].brutalist-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #FF3B1D;
+      border: 2px solid #F2EFE9;
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+    input[type="range"].brutalist-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      background: #CCFF00;
+      border-color: #080809;
+    }
+    input[type="range"].brutalist-slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: #FF3B1D;
+      border: 2px solid #F2EFE9;
+      cursor: pointer;
+      border-radius: 0;
+    }
+
+    /* Active Pipeline Node Pulse */
+    @keyframes pulseBorder {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 59, 29, 0.45); }
+      50% { box-shadow: 0 0 0 8px rgba(255, 59, 29, 0); }
+    }
+    .node-running {
+      border-color: #CCFF00 !important;
+      animation: pulseBorder 1.2s infinite;
+    }
+    .node-selected {
+      border-color: #FF3B1D !important;
+      background-color: rgba(255, 59, 29, 0.07) !important;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #080809;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2A2A32;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #FF3B1D;
+    }
+
+    /* Canvas container styling */
+    #webgl-container canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+      outline: none;
+    }
+  </style>
+</head>
+<body class="bg-obsidian text-bone bg-blueprint antialiased selection:bg-vermilion selection:text-obsidian">
+
+  <!-- Tactile Noise Overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- Custom Non-Intrusive Toast Notification -->
+  <div id="hud-toast" class="fixed bottom-6 right-6 z-[120] transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-surface border border-acid px-5 py-3.5 shadow-2xl flex items-center gap-3">
+    <span class="w-2.5 h-2.5 bg-acid inline-block animate-ping"></span>
+    <span id="hud-toast-text" class="font-mono text-xs tracking-wider uppercase text-bone">TELEMETRY UPDATED</span>
+  </div>
+
+  <!-- =====================================================================
+       1. TOP ARCHITECTURAL TELEMETRY BAR (STICKY HUD)
+       ===================================================================== -->
+  <header class="sticky top-0 z-50 bg-obsidian/90 backdrop-blur-md hairline-b">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-8 h-14 flex items-center justify-between gap-3">
+      
+      <!-- Brand Identity -->
+      <div class="flex items-center gap-4">
+        <a href="#hero" class="flex items-center gap-2.5 group">
+          <span class="w-3 h-3 bg-vermilion inline-block group-hover:bg-acid transition-colors"></span>
+          <span id="nav-brand-name" class="font-mono text-xs sm:text-sm font-bold tracking-wider uppercase text-bone">
+            [ALFEZ KHAN // FOYER AI]
+          </span>
+        </a>
+        <span class="hidden xl:inline-block font-mono text-[11px] text-titanium tracking-widest border-l border-bone/15 pl-4">
+          25.3407° N, 74.6313° E // <span id="ist-clock" class="text-bone">IST --:--:--</span>
+        </span>
+      </div>
+
+      <!-- Center Navigation Anchor Links -->
+      <nav class="hidden lg:flex items-center gap-6 font-mono text-xs uppercase tracking-wider text-titanium">
+        <a href="#pipeline" class="hover:text-bone transition-colors">[01. PIPELINE SIM]</a>
+        <a href="#deployments" class="hover:text-bone transition-colors">[02. DEPLOYMENTS]</a>
+        <a href="#roi-engine" class="hover:text-bone transition-colors">[03. ROI ENGINE]</a>
+        <a href="#outreach" class="hover:text-bone transition-colors">[04. TERMINAL]</a>
+      </nav>
+
+      <!-- Right Status & LinkedIn Data Customizer Trigger -->
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2 bg-surface px-3 py-1.5 hairline-border">
+          <span class="w-2 h-2 rounded-full bg-acid animate-pulse"></span>
+          <span id="nav-status-badge" class="font-mono text-[11px] tracking-wider text-bone uppercase">
+            STATUS: ACCEPTING B2B SYSTEMS RETAINERS
+          </span>
+        </div>
+
+        <button
+          id="open-customizer-btn"
+          onclick="toggleLinkedInDrawer(true)"
+          class="bg-vermilion/15 hover:bg-vermilion text-vermilion hover:text-obsidian border border-vermilion px-3 sm:px-3.5 py-1.5 font-mono text-[11px] font-bold tracking-wider uppercase transition-all duration-200 flex items-center gap-1.5 cursor-pointer"
+        >
+          <span>⚡ IMPORT / CUSTOMIZE LINKEDIN DATA</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       2. HERO SECTION + REAL THREE.JS KINETIC TENSOR CORE
+       ===================================================================== -->
+  <section id="hero" class="relative hairline-b overflow-hidden">
+    <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-3.5rem)]">
+      
+      <!-- Left Architectural Copy Column (7 Cols on Desktop) -->
+      <div class="lg:col-span-7 p-6 sm:p-10 lg:p-14 xl:p-16 flex flex-col justify-between hairline-r relative z-10 bg-obsidian/70 lg:bg-transparent">
+        
+        <!-- Top Eyebrow & Coordinate Tag -->
+        <div class="space-y-4">
+          <div class="inline-flex items-center gap-2.5 px-3 py-1.5 bg-surface hairline-border">
+            <span class="w-2 h-2 bg-vermilion"></span>
+            <span id="hero-eyebrow" class="font-mono text-[11px] sm:text-xs uppercase tracking-widest text-bone">
+              FOUNDER @ FOYER AI // AI VIDEO & AUTONOMOUS LEAD SYSTEMS
+            </span>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4 font-mono text-[11px] text-titanium">
+            <span>ALIAS: <strong class="text-bone">ALFIE</strong></span>
+            <span>•</span>
+            <span>NICHE: <strong class="text-bone">REAL ESTATE BROKERS & WEALTH ADVISORS</strong></span>
+            <span>•</span>
+            <span>ARCH: <strong class="text-acid">REV 4.2 LIVE</strong></span>
+          </div>
+        </div>
+
+        <!-- Monumental Headline & Subheadline -->
+        <div class="my-10 lg:my-12 space-y-6">
+          <h1 id="hero-headline" class="hero-display text-4xl sm:text-6xl xl:text-[68px] text-bone uppercase">
+            WE CLONE BROKERS &amp; AUTOMATE PIPELINES <span class="text-vermilion">THAT CLOSE.</span>
+          </h1>
+
+          <p id="hero-subheadline" class="text-base sm:text-lg xl:text-xl text-titanium max-w-2xl font-normal leading-relaxed">
+            I build 60-second AI avatar video engines and sub-10-second automated lead follow-up architectures for Real Estate Brokers &amp; Financial Advisors. <span class="text-bone font-medium">Zero filming. Zero dead leads.</span>
+          </p>
+
+          <!-- Primary & Secondary Magnetic CTAs -->
+          <div class="pt-4 flex flex-wrap items-center gap-4">
+            <a
+              id="hero-linkedin-cta"
+              href="https://www.linkedin.com/in/alfezkhan-ai/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="magnetic-btn group bg-vermilion hover:bg-acid text-obsidian font-mono text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-4 transition-colors duration-200 flex items-center gap-3"
+            >
+              <span>CONNECT ON LINKEDIN // @ALFEZKHAN-AI</span>
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="square" d="M7 17L17 7M17 7H8M17 7V16"/>
+              </svg>
+            </a>
+
+            <a
+              href="#pipeline"
+              class="magnetic-btn bg-surface hover:bg-surfaceHigh text-bone hairline-border hover:border-bone px-6 py-4 font-mono text-xs sm:text-sm uppercase tracking-wider transition-all duration-200"
+            >
+              [TEST LIVE PIPELINE SIMULATOR ↓]
+            </a>
+          </div>
+        </div>
+
+        <!-- Bottom Bio & Quick Telemetry Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 hairline-t">
+          <div>
+            <div class="font-mono text-[10px] text-titanium uppercase">SPEED-TO-LEAD</div>
+            <div class="font-syne text-2xl font-extrabold text-bone mt-0.5">&lt; 6.4 SEC</div>
+          </div>
+          <div>
+            <div class="font-mono text-[10px] text-titanium uppercase">AVATAR SYNTHESIS</div>
+            <div class="font-syne text-2xl font-extrabold text-bone mt-0.5">60s 4K TWIN</div>
+          </div>
+          <div>
+            <div class="font-mono text-[10px] text-titanium uppercase">CORE ORCHESTRATION</div>
+            <div class="font-syne text-2xl font-extrabold text-acid mt-0.5">MAKE + N8N</div>
+          </div>
+          <div>
+            <div class="font-mono text-[10px] text-titanium uppercase">QUALIFICATION</div>
+            <div class="font-syne text-2xl font-extrabold text-vermilion mt-0.5">24/7 AUTONOMOUS</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Interactive Three.js WebGL Centerpiece Column (5 Cols on Desktop) -->
+      <div class="lg:col-span-5 relative min-h-[460px] lg:min-h-full bg-[#0A0A0D] flex flex-col justify-between overflow-hidden">
+        
+        <!-- Top WebGL Telemetry Header Overlay -->
+        <div class="relative z-20 p-4 sm:p-6 flex items-center justify-between pointer-events-none">
+          <div class="font-mono text-[11px] text-titanium space-y-0.5">
+            <div class="text-bone font-bold">WEBGL // KINETIC TENSOR CORE</div>
+            <div id="webgl-coords">ROT_X: 0.42 | ROT_Y: 0.88 | FPS: 60</div>
+          </div>
+          <div class="px-2.5 py-1 bg-obsidian/80 hairline-border font-mono text-[10px] text-acid uppercase">
+            DRAG TO ORBIT • SCROLL LINKED
+          </div>
+        </div>
+
+        <!-- Three.js Canvas Mount -->
+        <div id="webgl-container" class="absolute inset-0 z-10 cursor-grab active:cursor-grabbing"></div>
+
+        <!-- Bottom Interactive Shader & Distortion HUD Switcher -->
+        <div class="relative z-20 p-4 sm:p-6 bg-gradient-to-t from-obsidian via-obsidian/90 to-transparent space-y-3">
+          <div class="flex items-center justify-between font-mono text-[10px] text-titanium uppercase">
+            <span>SELECT GEOMETRY SHADER ARCHITECTURE</span>
+            <span id="active-shader-label" class="text-vermilion font-bold">MODE 01 // DUAL WIREFRAME</span>
+          </div>
+
+          <!-- 3 Shader Mode Buttons -->
+          <div class="grid grid-cols-3 gap-2">
+            <button
+              onclick="setShaderMode(1)"
+              id="shader-btn-1"
+              class="shader-btn bg-vermilion text-obsidian font-mono text-[11px] font-bold py-2 px-2 uppercase tracking-wider transition-all border border-vermilion cursor-pointer"
+            >
+              [01: WIREFRAME]
+            </button>
+            <button
+              onclick="setShaderMode(2)"
+              id="shader-btn-2"
+              class="shader-btn bg-surface/90 text-bone hover:border-bone font-mono text-[11px] py-2 px-2 uppercase tracking-wider transition-all hairline-border cursor-pointer"
+            >
+              [02: MONOLITH]
+            </button>
+            <button
+              onclick="setShaderMode(3)"
+              id="shader-btn-3"
+              class="shader-btn bg-surface/90 text-bone hover:border-bone font-mono text-[11px] py-2 px-2 uppercase tracking-wider transition-all hairline-border cursor-pointer"
+            >
+              [03: VORTEX]
+            </button>
+          </div>
+
+          <!-- Real-Time Vertex Distortion / Frequency Slider -->
+          <div class="pt-1 flex items-center gap-3">
+            <span class="font-mono text-[10px] text-titanium uppercase whitespace-nowrap">TENSOR FREQUENCY:</span>
+            <input
+              id="tensor-freq-slider"
+              type="range"
+              min="0"
+              max="100"
+              value="38"
+              class="brutalist-slider"
+              oninput="updateTensorFrequency(this.value)"
+            />
+            <span id="tensor-freq-val" class="font-mono text-xs text-acid w-10 text-right">38Hz</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Live Proof Architectural Ticker Bar -->
+    <div class="bg-surface hairline-t py-3.5 overflow-hidden">
+      <div class="animate-ticker font-mono text-xs uppercase tracking-widest text-bone flex items-center gap-8">
+        <span class="flex items-center gap-3"><i class="w-2 h-2 bg-vermilion inline-block"></i> &lt; 8s LEAD RESPONSE TIME</span>
+        <span class="text-titanium">//</span>
+        <span class="flex items-center gap-3"><i class="w-2 h-2 bg-acid inline-block"></i> 60s HYPER-REALISTIC AI AVATARS</span>
+        <span class="text-titanium">//</span>
+        <span>MAKE.COM + N8N + VOICEFLOW + TWILIO + HEYGEN</span>
+        <span class="text-titanium">//</span>
+        <span class="flex items-center gap-3"><i class="w-2 h-2 bg-vermilion inline-block"></i> 24/7 AUTONOMOUS QUALIFICATION</span>
+        <span class="text-titanium">//</span>
+        <span>GOOGLE VIDS + CAPCUT + VN + CORELDRAW VBA AUTOMATION</span>
+        <span class="text-titanium">//</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="flex items-center gap-3"><i class="w-2 h-2 bg-vermilion inline-block"></i> &lt; 8s LEAD RESPONSE TIME</span>
+        <span class="text-titanium">//</span>
+        <span class="flex items-center gap-3"><i class="w-2 h-2 bg-acid inline-block"></i> 60s HYPER-REALISTIC AI AVATARS</span>
+        <span class="text-titanium">//</span>
+        <span>MAKE.COM + N8N + VOICEFLOW + TWILIO + HEYGEN</span>
+        <span class="text-titanium">//</span>
+        <span class="flex items-center gap-3"><i class="w-2 h-2 bg-vermilion inline-block"></i> 24/7 AUTONOMOUS QUALIFICATION</span>
+        <span class="text-titanium">//</span>
+        <span>GOOGLE VIDS + CAPCUT + VN + CORELDRAW VBA AUTOMATION</span>
+        <span class="text-titanium">//</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       3. EXECUTIVE ARCHITECTURAL BRIEF (ABOUT ALFEZ / FOYER AI)
+       ===================================================================== -->
+  <section class="hairline-b bg-obsidian">
+    <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12">
+      <div class="lg:col-span-4 p-6 sm:p-10 hairline-r flex flex-col justify-between">
+        <div>
+          <div class="font-mono text-xs text-vermilion uppercase tracking-widest mb-2">[00 // ARCHITECT PROFILE]</div>
+          <h2 class="section-display text-3xl sm:text-4xl uppercase text-bone">THE ANTI-AGENCY APPROACH.</h2>
+        </div>
+        <div class="mt-8 pt-6 hairline-t font-mono text-xs text-titanium space-y-2">
+          <div>OPERATOR: <span id="about-operator-name" class="text-bone">ALFEZ KHAN ("ALFIE")</span></div>
+          <div>VENTURE: <span class="text-bone">FOYER AI</span></div>
+          <div>EDUCATION: <span id="about-education" class="text-bone">SANGAM UNIVERSITY (BCA / SYSTEMS)</span></div>
+          <div>BASE: <span class="text-bone">RAJASTHAN, IN // GLOBAL REMOTE</span></div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-8 p-6 sm:p-10 lg:p-12 flex flex-col justify-center space-y-6">
+        <p id="about-bio-primary" class="text-lg sm:text-2xl text-bone font-medium leading-snug">
+          Most Real Estate Brokers and Financial Advisors lose 78% of high-intent pipeline for two simple reasons: they don't have time to sit in front of a camera for 6 hours a week, and they take 4+ hours to reply to inbound leads.
+        </p>
+        <p id="about-bio-secondary" class="text-sm sm:text-base text-titanium leading-relaxed">
+          At <strong class="text-bone">Foyer AI</strong>, I engineer two interconnected revenue weapons: hyper-realistic 60-second AI video clones that publish daily authority content &amp; personalized video DMs without you ever recording a take, paired with deterministic <strong class="text-bone">Make.com, n8n, Voiceflow, and Twilio</strong> webhook pipelines that ingest, score, and book appointments with leads in under 8 seconds.
+        </p>
+
+        <!-- Verified Technical Stack Matrix (Replacing cheesy skill bars) -->
+        <div class="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
+          <div class="p-3 bg-surface hairline-border">
+            <div class="text-vermilion text-[10px] mb-1">ORCHESTRATION</div>
+            <div class="text-bone font-bold">Make.com • n8n • Webhooks • REST JSON</div>
+          </div>
+          <div class="p-3 bg-surface hairline-border">
+            <div class="text-acid text-[10px] mb-1">CONVERSATIONAL AI</div>
+            <div class="text-bone font-bold">Voiceflow • Twilio SMS • OpenAI / Claude</div>
+          </div>
+          <div class="p-3 bg-surface hairline-border">
+            <div class="text-vermilion text-[10px] mb-1">AVATAR &amp; VIDEO</div>
+            <div class="text-bone font-bold">HeyGen API • ElevenLabs • Google Vids • CapCut</div>
+          </div>
+          <div class="p-3 bg-surface hairline-border">
+            <div class="text-acid text-[10px] mb-1">MACRO AUTOMATION</div>
+            <div class="text-bone font-bold">CorelDRAW VBA • Canva Bulk • VN Pipeline</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       4. INTERACTIVE LIVE SYSTEM PIPELINE SIMULATOR
+       ===================================================================== -->
+  <section id="pipeline" class="hairline-b py-16 sm:py-24 px-4 sm:px-8 max-w-[1440px] mx-auto">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+      <div>
+        <div class="inline-flex items-center gap-2 font-mono text-xs text-vermilion uppercase tracking-widest mb-3">
+          <span>[01 // INTERACTIVE ARCHITECTURE SIMULATOR]</span>
+        </div>
+        <h2 class="section-display text-3xl sm:text-5xl uppercase text-bone">
+          SUB-8-SECOND AUTONOMOUS LEAD ENGINE
+        </h2>
+      </div>
+
+      <!-- Controls: Lead Scenario Selector + Run Payload Trigger -->
+      <div class="flex flex-wrap items-center gap-3">
+        <select
+          id="payload-preset-select"
+          onchange="changePayloadPreset(this.value)"
+          class="bg-surface text-bone font-mono text-xs uppercase px-4 py-3.5 hairline-border focus:border-vermilion outline-none cursor-pointer"
+        >
+          <option value="penthouse">SCENARIO A: $4.2M PENTHOUSE BUYER (MIAMI)</option>
+          <option value="wealth">SCENARIO B: $2.5M RETIREMENT ROLLOVER (WEALTH)</option>
+          <option value="commercial">SCENARIO C: $8.9M MULTI-FAMILY SYNDICATION</option>
+        </select>
+
+        <button
+          id="run-pipeline-btn"
+          onclick="runPipelineSimulation()"
+          class="bg-acid hover:bg-vermilion text-obsidian font-mono text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-3.5 transition-colors flex items-center gap-2.5 cursor-pointer"
+        >
+          <span id="run-btn-icon">▶</span>
+          <span id="run-btn-label">RUN LIVE LEAD PAYLOAD</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 4-Node Architectural Diagram Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      
+      <!-- NODE 01 -->
+      <div
+        id="sim-node-0"
+        onclick="inspectNode(0)"
+        class="crosshair-box bg-surface p-6 hairline-border cursor-pointer transition-all hover:border-bone node-selected"
+      >
+        <div class="flex items-center justify-between font-mono text-xs mb-4">
+          <span class="text-vermilion font-bold">NODE 01 // INGEST</span>
+          <span id="node-status-0" class="px-2 py-0.5 bg-obsidian text-titanium text-[10px]">0.12s LATENCY</span>
+        </div>
+        <h3 class="font-syne text-xl font-bold text-bone uppercase mb-2">INGESTION WEBHOOK</h3>
+        <p class="text-xs text-titanium leading-relaxed mb-4">
+          Captures raw lead payloads from Meta Lead Ads, LinkedIn Outbound, or Zillow/MLS Property Portals via instant HTTP POST.
+        </p>
+        <div class="font-mono text-[11px] text-bone/80 pt-3 hairline-t flex items-center justify-between">
+          <span>STACK: MAKE.COM WEBHOOK</span>
+          <span class="text-vermilion">[INSPECT JSON →]</span>
+        </div>
+      </div>
+
+      <!-- NODE 02 -->
+      <div
+        id="sim-node-1"
+        onclick="inspectNode(1)"
+        class="crosshair-box bg-surface p-6 hairline-border cursor-pointer transition-all hover:border-bone"
+      >
+        <div class="flex items-center justify-between font-mono text-xs mb-4">
+          <span class="text-vermilion font-bold">NODE 02 // SCORE</span>
+          <span id="node-status-1" class="px-2 py-0.5 bg-obsidian text-titanium text-[10px]">1.45s LATENCY</span>
+        </div>
+        <h3 class="font-syne text-xl font-bold text-bone uppercase mb-2">AI QUALIFICATION ENGINE</h3>
+        <p class="text-xs text-titanium leading-relaxed mb-4">
+          Enriches prospect data, calculates net-worth/budget score, and extracts personalized talking points via LLM router.
+        </p>
+        <div class="font-mono text-[11px] text-bone/80 pt-3 hairline-t flex items-center justify-between">
+          <span>STACK: N8N + CLAUDE 3.7</span>
+          <span class="text-vermilion">[INSPECT JSON →]</span>
+        </div>
+      </div>
+
+      <!-- NODE 03 -->
+      <div
+        id="sim-node-2"
+        onclick="inspectNode(2)"
+        class="crosshair-box bg-surface p-6 hairline-border cursor-pointer transition-all hover:border-bone"
+      >
+        <div class="flex items-center justify-between font-mono text-xs mb-4">
+          <span class="text-vermilion font-bold">NODE 03 // CLONE</span>
+          <span id="node-status-2" class="px-2 py-0.5 bg-obsidian text-titanium text-[10px]">3.20s LATENCY</span>
+        </div>
+        <h3 class="font-syne text-xl font-bold text-bone uppercase mb-2">AVATAR VIDEO SYNTHESIS</h3>
+        <p class="text-xs text-titanium leading-relaxed mb-4">
+          Dynamically injects prospect name &amp; property address into a custom 60-second 4K AI Broker Twin video greeting.
+        </p>
+        <div class="font-mono text-[11px] text-bone/80 pt-3 hairline-t flex items-center justify-between">
+          <span>STACK: HEYGEN + ELEVENLABS</span>
+          <span class="text-vermilion">[INSPECT JSON →]</span>
+        </div>
+      </div>
+
+      <!-- NODE 04 -->
+      <div
+        id="sim-node-3"
+        onclick="inspectNode(3)"
+        class="crosshair-box bg-surface p-6 hairline-border cursor-pointer transition-all hover:border-bone"
+      >
+        <div class="flex items-center justify-between font-mono text-xs mb-4">
+          <span class="text-vermilion font-bold">NODE 04 // CLOSE</span>
+          <span id="node-status-3" class="px-2 py-0.5 bg-obsidian text-titanium text-[10px]">1.63s LATENCY</span>
+        </div>
+        <h3 class="font-syne text-xl font-bold text-bone uppercase mb-2">OMNICHANNEL DISPATCH</h3>
+        <p class="text-xs text-titanium leading-relaxed mb-4">
+          Dispatches the personalized AI video + SMS via Twilio &amp; WhatsApp, initiating a Voiceflow conversational booking loop.
+        </p>
+        <div class="font-mono text-[11px] text-bone/80 pt-3 hairline-t flex items-center justify-between">
+          <span>STACK: TWILIO + VOICEFLOW</span>
+          <span class="text-vermilion">[INSPECT JSON →]</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inspector Panel: JSON Payload Viewer + Live Telemetry Execution Console -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Left: Selected Node JSON Schema & Architectural Outcome -->
+      <div class="lg:col-span-6 bg-surface hairline-border p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between pb-4 hairline-b mb-4">
+            <div>
+              <span id="inspector-node-tag" class="font-mono text-xs text-acid uppercase font-bold">NODE 01 // WEBHOOK PAYLOAD INSPECTOR</span>
+              <h4 id="inspector-node-title" class="font-syne text-2xl font-bold text-bone mt-1">META ADS / MLS PROPERTY INGESTION</h4>
+            </div>
+            <button
+              onclick="copyInspectorJson()"
+              class="px-3 py-1.5 bg-obsidian hairline-border font-mono text-[11px] text-titanium hover:text-bone uppercase cursor-pointer"
+            >
+              [COPY JSON]
+            </button>
+          </div>
+
+          <pre id="inspector-json-box" class="bg-obsidian p-4 hairline-border font-mono text-xs text-acid overflow-x-auto leading-relaxed max-h-[260px]"></pre>
+        </div>
+
+        <div class="mt-6 pt-4 hairline-t flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <div class="font-mono text-[10px] text-titanium uppercase">BUSINESS OUTCOME</div>
+            <div id="inspector-outcome" class="text-sm text-bone font-medium mt-0.5">
+              Zero manual CSV exports. Every lead enters the qualification pipeline within 120ms of form submit.
+            </div>
+          </div>
+          <span id="inspector-stack-badge" class="font-mono text-xs px-3 py-1.5 bg-vermilion/15 border border-vermilion text-vermilion whitespace-nowrap self-start sm:self-center">
+            MAKE.COM + WEBHOOKS
+          </span>
+        </div>
+      </div>
+
+      <!-- Right: Live Animated Execution Terminal Log -->
+      <div class="lg:col-span-6 bg-[#060608] hairline-border p-6 flex flex-col justify-between">
+        <div class="flex items-center justify-between pb-4 hairline-b mb-4">
+          <div class="flex items-center gap-2.5">
+            <span id="terminal-led" class="w-2.5 h-2.5 rounded-full bg-acid"></span>
+            <span class="font-mono text-xs text-bone uppercase font-bold">FOYER_OS // LIVE EXECUTION TELEMETRY</span>
+          </div>
+          <span id="terminal-timer" class="font-mono text-xs text-vermilion">TOTAL ELAPSED: 6.40s</span>
+        </div>
+
+        <!-- Scrollable Terminal Stream -->
+        <div id="pipeline-terminal-logs" class="font-mono text-xs space-y-2.5 h-[260px] overflow-y-auto pr-2">
+          <!-- Populated dynamically by JS -->
+        </div>
+
+        <div class="mt-6 pt-4 hairline-t flex items-center justify-between font-mono text-[11px] text-titanium">
+          <span>STATUS: <strong id="terminal-status-text" class="text-acid">READY FOR PAYLOAD EXECUTION</strong></span>
+          <button onclick="runPipelineSimulation()" class="text-vermilion hover:underline uppercase cursor-pointer">[RE-TRIGGER SIMULATION ↻]</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       5. 3D-TILT BENTO CASE STUDIES & SELECTED DEPLOYMENTS
+       ===================================================================== -->
+  <section id="deployments" class="hairline-b py-16 sm:py-24 px-4 sm:px-8 max-w-[1440px] mx-auto">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+      <div>
+        <div class="font-mono text-xs text-vermilion uppercase tracking-widest mb-3">
+          [02 // PRODUCTION DEPLOYMENTS &amp; ARCHITECTURES]
+        </div>
+        <h2 class="section-display text-3xl sm:text-5xl uppercase text-bone">
+          SYSTEMS ENGINEERED TO SCALE TRUST.
+        </h2>
+      </div>
+      <p class="font-mono text-xs text-titanium max-w-md uppercase">
+        HOVER FOR 3D PERSPECTIVE TELEMETRY • CLICK ANY SYSTEM BLUEPRINT TO INSPECT FULL ARCHITECTURAL SPECS.
+      </p>
+    </div>
+
+    <!-- 2x2 Bento Grid with 3D Tilt Cards -->
+    <div id="case-studies-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- SYS-01 (7 Columns) -->
+      <article
+        onclick="openSystemModal(0)"
+        class="tilt-card crosshair-box lg:col-span-7 bg-surface hairline-border p-7 sm:p-10 flex flex-col justify-between cursor-pointer group"
+      >
+        <div class="tilt-glare"></div>
+        <div>
+          <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-xs mb-6">
+            <span class="px-2.5 py-1 bg-vermilion text-obsidian font-bold">SYS-01 // FLAGSHIP ARCHITECTURE</span>
+            <span class="text-acid">ZERO FILMING REQUIRED • 60s AVATAR ENGINE</span>
+          </div>
+
+          <h3 id="case-0-title" class="font-syne text-2xl sm:text-4xl font-extrabold text-bone uppercase group-hover:text-vermilion transition-colors mb-4">
+            FOYER AI — 60s AI AVATAR OUTBOUND &amp; CONTENT ENGINE
+          </h3>
+
+          <p id="case-0-desc" class="text-titanium text-sm sm:text-base leading-relaxed mb-6">
+            End-to-end digital twin production and LinkedIn/DM video outreach systems built for Real Estate Brokers and Financial Advisors. We train a hyper-realistic 4K AI clone on a single 3-minute calibration video, automating daily short-form authority reels and personalized 1-to-1 prospect videos.
+          </p>
+        </div>
+
+        <div class="pt-6 hairline-t flex flex-wrap items-center justify-between gap-4">
+          <div class="flex flex-wrap gap-2 font-mono text-[11px]">
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-bone">HEYGEN API</span>
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-bone">ELEVENLABS VOICE CLONE</span>
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-bone">LINKEDIN DM ENGINE</span>
+          </div>
+          <span class="font-mono text-xs text-vermilion group-hover:translate-x-1 transition-transform uppercase font-bold">
+            [INSPECT ARCHITECTURE +]
+          </span>
+        </div>
+      </article>
+
+      <!-- SYS-02 (5 Columns) -->
+      <article
+        onclick="openSystemModal(1)"
+        class="tilt-card crosshair-box lg:col-span-5 bg-surface hairline-border p-7 sm:p-10 flex flex-col justify-between cursor-pointer group"
+      >
+        <div class="tilt-glare"></div>
+        <div>
+          <div class="flex items-center justify-between font-mono text-xs mb-6">
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-vermilion font-bold">SYS-02 // LEAD ROUTER</span>
+            <span class="text-titanium">MAKE.COM + JSON</span>
+          </div>
+
+          <h3 id="case-1-title" class="font-syne text-2xl sm:text-3xl font-extrabold text-bone uppercase group-hover:text-vermilion transition-colors mb-4">
+            REAL ESTATE JSON LEAD QUALIFICATION ENGINE
+          </h3>
+
+          <p id="case-1-desc" class="text-titanium text-sm sm:text-base leading-relaxed mb-6">
+            Automated Make.com scenario architecture processing incoming property portal and Meta ad webhooks. Parses buyer budget, financing readiness, and timeline from raw JSON payloads and triggers instant segmented alerts.
+          </p>
+        </div>
+
+        <div class="pt-6 hairline-t flex flex-wrap items-center justify-between gap-4">
+          <div class="flex flex-wrap gap-2 font-mono text-[11px]">
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-bone">MAKE.COM</span>
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-bone">JSON PARSER</span>
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-bone">CRM SYNC</span>
+          </div>
+          <span class="font-mono text-xs text-vermilion group-hover:translate-x-1 transition-transform uppercase font-bold">
+            [SPECIFICATIONS +]
+          </span>
+        </div>
+      </article>
+
+      <!-- SYS-03 (5 Columns) -->
+      <article
+        onclick="openSystemModal(2)"
+        class="tilt-card crosshair-box lg:col-span-5 bg-surface hairline-border p-7 sm:p-10 flex flex-col justify-between cursor-pointer group"
+      >
+        <div class="tilt-glare"></div>
+        <div>
+          <div class="flex items-center justify-between font-mono text-xs mb-6">
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-acid font-bold">SYS-03 // AUTONOMOUS SETTER</span>
+            <span class="text-titanium">24/7 CONVERSATIONAL AI</span>
+          </div>
+
+          <h3 id="case-2-title" class="font-syne text-2xl sm:text-3xl font-extrabold text-bone uppercase group-hover:text-vermilion transition-colors mb-4">
+            VOICEFLOW + TWILIO + N8N APPOINTMENT SETTER
+          </h3>
+
+          <p id="case-2-desc" class="text-titanium text-sm sm:text-base leading-relaxed mb-6">
+            Multi-turn autonomous conversational agent that follows up with cold and warm property/wealth leads via SMS and WhatsApp, overcoming initial objections and booking qualified discovery calls directly onto the advisor's calendar.
+          </p>
+        </div>
+
+        <div class="pt-6 hairline-t flex flex-wrap items-center justify-between gap-4">
+          <div class="flex flex-wrap gap-2 font-mono text-[11px]">
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-bone">VOICEFLOW</span>
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-bone">TWILIO API</span>
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-bone">N8N WORKFLOWS</span>
+          </div>
+          <span class="font-mono text-xs text-vermilion group-hover:translate-x-1 transition-transform uppercase font-bold">
+            [SPECIFICATIONS +]
+          </span>
+        </div>
+      </article>
+
+      <!-- SYS-04 (7 Columns) -->
+      <article
+        onclick="openSystemModal(3)"
+        class="tilt-card crosshair-box lg:col-span-7 bg-surface hairline-border p-7 sm:p-10 flex flex-col justify-between cursor-pointer group"
+      >
+        <div class="tilt-glare"></div>
+        <div>
+          <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-xs mb-6">
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-vermilion font-bold">SYS-04 // MEDIA &amp; MACRO PIPELINE</span>
+            <span class="text-acid">HIGH-VELOCITY ASSET SYNTHESIS</span>
+          </div>
+
+          <h3 id="case-3-title" class="font-syne text-2xl sm:text-4xl font-extrabold text-bone uppercase group-hover:text-vermilion transition-colors mb-4">
+            HIGH-VELOCITY VIDEO &amp; CORELDRAW VBA AUTOMATION
+          </h3>
+
+          <p id="case-3-desc" class="text-titanium text-sm sm:text-base leading-relaxed mb-6">
+            Industrial-grade media assembly pipeline combining Google Vids, CapCut, VN Editor, Canva bulk templates, and custom CorelDRAW VBA macros. Automates dynamic kinetic captions, property flyer batch rendering, and multi-channel creative distribution.
+          </p>
+        </div>
+
+        <div class="pt-6 hairline-t flex flex-wrap items-center justify-between gap-4">
+          <div class="flex flex-wrap gap-2 font-mono text-[11px]">
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-bone">GOOGLE VIDS</span>
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-bone">CAPCUT + VN</span>
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-bone">CORELDRAW VBA</span>
+            <span class="px-2.5 py-1 bg-obsidian hairline-border text-bone">CANVA AUTOMATION</span>
+          </div>
+          <span class="font-mono text-xs text-vermilion group-hover:translate-x-1 transition-transform uppercase font-bold">
+            [INSPECT ARCHITECTURE +]
+          </span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       6. INTERACTIVE CLIENT ROI & TIME-RECLAIMED CALCULATOR
+       ===================================================================== -->
+  <section id="roi-engine" class="hairline-b py-16 sm:py-24 px-4 sm:px-8 max-w-[1440px] mx-auto">
+    
+    <div class="mb-12">
+      <div class="font-mono text-xs text-vermilion uppercase tracking-widest mb-3">
+        [03 // TELEMETRY &amp; REVENUE IMPACT SIMULATOR]
+      </div>
+      <h2 class="section-display text-3xl sm:text-5xl uppercase text-bone">
+        BROKER &amp; ADVISOR ROI CALCULATOR.
+      </h2>
+      <p class="text-titanium text-sm sm:text-base mt-3 max-w-2xl">
+        Adjust the telemetry sliders below to model the exact pipeline recovery and filming hours reclaimed when deploying a Foyer AI Avatar + Sub-8-Second Lead Follow-Up Engine.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      
+      <!-- Left: Interactive Sliders (6 Cols) -->
+      <div class="lg:col-span-6 bg-surface hairline-border p-6 sm:p-10 flex flex-col justify-between space-y-8">
+        
+        <!-- Slider 1: Monthly Leads -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <label for="roi-leads" class="font-mono text-xs uppercase text-titanium">01. MONTHLY INBOUND / OUTBOUND LEADS</label>
+            <span id="roi-leads-display" class="font-syne text-2xl font-extrabold text-bone">180 LEADS/MO</span>
+          </div>
+          <input
+            id="roi-leads"
+            type="range"
+            min="20"
+            max="1000"
+            step="10"
+            value="180"
+            class="brutalist-slider"
+            oninput="calculateROI()"
+          />
+          <div class="flex justify-between font-mono text-[10px] text-titanium">
+            <span>20 LEADS</span>
+            <span>500 LEADS</span>
+            <span>1,000 LEADS</span>
+          </div>
+        </div>
+
+        <!-- Slider 2: Average Deal Commission -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <label for="roi-commission" class="font-mono text-xs uppercase text-titanium">02. AVERAGE DEAL COMMISSION / LTV</label>
+            <span id="roi-commission-display" class="font-syne text-2xl font-extrabold text-bone">$12,500</span>
+          </div>
+          <input
+            id="roi-commission"
+            type="range"
+            min="2000"
+            max="50000"
+            step="500"
+            value="12500"
+            class="brutalist-slider"
+            oninput="calculateROI()"
+          />
+          <div class="flex justify-between font-mono text-[10px] text-titanium">
+            <span>$2,000</span>
+            <span>$25,000</span>
+            <span>$50,000</span>
+          </div>
+        </div>
+
+        <!-- Slider 3: Weekly Hours Filming & Manual Chasing -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <label for="roi-hours" class="font-mono text-xs uppercase text-titanium">03. WEEKLY HRS FILMING &amp; MANUAL FOLLOW-UP</label>
+            <span id="roi-hours-display" class="font-syne text-2xl font-extrabold text-bone">14 HRS/WK</span>
+          </div>
+          <input
+            id="roi-hours"
+            type="range"
+            min="2"
+            max="40"
+            step="1"
+            value="14"
+            class="brutalist-slider"
+            oninput="calculateROI()"
+          />
+          <div class="flex justify-between font-mono text-[10px] text-titanium">
+            <span>2 HRS/WK</span>
+            <span>20 HRS/WK</span>
+            <span>40 HRS/WK</span>
+          </div>
+        </div>
+
+        <div class="pt-4 hairline-t font-mono text-[11px] text-titanium leading-relaxed">
+          * MODEL ASSUMPTION: Harvard Business Review &amp; InsideSales telemetry indicates responding within &lt;10 seconds vs. 4+ hours increases lead-to-qualified-appointment conversion by 391%, recovering ~2.2% of previously leaked monthly volume.
+        </div>
+      </div>
+
+      <!-- Right: Real-Time Calculated Outputs (6 Cols) -->
+      <div class="lg:col-span-6 bg-[#0B0B0E] hairline-border p-6 sm:p-10 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between font-mono text-xs pb-4 hairline-b mb-6">
+            <span class="text-acid uppercase font-bold">PROJECTED FOYER AI ANNUAL TELEMETRY</span>
+            <span class="text-titanium">LIVE COMPUTATION</span>
+          </div>
+
+          <div class="mb-8">
+            <div class="font-mono text-xs text-titanium uppercase mb-1">PROJECTED RECOVERED ANNUAL PIPELINE</div>
+            <div id="roi-output-pipeline" class="hero-display text-4xl sm:text-6xl xl:text-7xl text-acid">
+              +$594,000
+            </div>
+            <div id="roi-output-deals" class="font-mono text-xs text-bone mt-2">
+              EST. +48 RECOVERED HIGH-INTENT CLOSINGS / YEAR
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            <div class="p-4 bg-surface hairline-border">
+              <div class="font-mono text-[10px] text-titanium uppercase">EXECUTIVE TIME RECLAIMED</div>
+              <div id="roi-output-hours" class="font-syne text-3xl font-extrabold text-bone mt-1">728 HRS/YR</div>
+              <div class="font-mono text-[11px] text-vermilion mt-1">ZERO CAMERA SETUP</div>
+            </div>
+
+            <div class="p-4 bg-surface hairline-border">
+              <div class="font-mono text-[10px] text-titanium uppercase">SPEED-TO-LEAD DELTA</div>
+              <div class="font-syne text-3xl font-extrabold text-bone mt-1">4.2h → <span class="text-acid">6.4s</span></div>
+              <div class="font-mono text-[11px] text-acid mt-1">99.96% LATENCY DROP</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-6 hairline-t flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="font-mono text-xs text-titanium">
+            WANT THIS PIPELINE DEPLOYED IN YOUR BROKERAGE?
+          </div>
+          <a
+            href="#outreach"
+            class="bg-vermilion hover:bg-acid text-obsidian font-mono text-xs font-bold uppercase px-5 py-3 text-center transition-colors"
+          >
+            [LOCK IN SYSTEM AUDIT →]
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       7. BRUTALIST HIGH-IMPACT FOOTER & DIRECT OUTREACH TERMINAL
+       ===================================================================== -->
+  <footer id="outreach" class="bg-obsidian pt-16 sm:pt-24 pb-12 px-4 sm:px-8 max-w-[1440px] mx-auto">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-16 hairline-b">
+      
+      <!-- Left: Monumental Callout & Direct LinkedIn Card (6 Cols) -->
+      <div class="lg:col-span-6 flex flex-col justify-between space-y-8">
+        <div>
+          <div class="font-mono text-xs text-vermilion uppercase tracking-widest mb-3">
+            [04 // DIRECT TRANSMISSION TERMINAL]
+          </div>
+          <h2 class="hero-display text-4xl sm:text-6xl uppercase text-bone">
+            STOP CHASING.<br/>START <span class="text-vermilion">CLONING.</span>
+          </h2>
+          <p class="text-titanium text-base sm:text-lg mt-4 max-w-xl leading-relaxed">
+            Whether you want a 60-second AI twin that posts &amp; DMs while you close deals, or a Make.com + Voiceflow webhook engine that qualifies every inbound lead in 6 seconds—let's architect your system on LinkedIn.
+          </p>
+        </div>
+
+        <div class="p-6 bg-surface hairline-border space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="font-mono text-xs text-acid uppercase font-bold">PRIMARY COMMUNICATION CHANNEL</div>
+              <div class="font-syne text-2xl font-bold text-bone mt-0.5">ALFEZ KHAN // @ALFEZKHAN-AI</div>
+            </div>
+            <span class="px-3 py-1 bg-obsidian hairline-border font-mono text-[11px] text-bone">AVG REPLY: &lt; 2 HRS</span>
+          </div>
+
+          <a
+            id="footer-linkedin-link"
+            href="https://www.linkedin.com/in/alfezkhan-ai/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full bg-bone hover:bg-acid text-obsidian font-mono text-xs sm:text-sm font-bold uppercase py-4 px-6 flex items-center justify-between transition-colors"
+          >
+            <span>OPEN ALFEZ KHAN'S LINKEDIN PROFILE</span>
+            <span>linkedin.com/in/alfezkhan-ai ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Interactive "Generate Sample Audit Request" DM Builder (6 Cols) -->
+      <div class="lg:col-span-6 bg-surface hairline-border p-6 sm:p-10 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between pb-4 hairline-b mb-6">
+            <span class="font-mono text-xs text-vermilion uppercase font-bold">INTERACTIVE LINKEDIN DM AUDIT GENERATOR</span>
+            <span class="font-mono text-[11px] text-titanium">1-CLICK COPY &amp; SEND</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block font-mono text-[11px] text-titanium uppercase mb-1.5">YOUR NAME / BROKERAGE</label>
+              <input
+                id="dm-sender-name"
+                type="text"
+                placeholder="e.g. Marcus Vance // Sotheby's"
+                oninput="updateGeneratedDM()"
+                class="w-full bg-obsidian hairline-border px-3.5 py-2.5 font-mono text-xs text-bone focus:border-vermilion outline-none"
+              />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] text-titanium uppercase mb-1.5">YOUR VERTICAL</label>
+              <select
+                id="dm-sender-niche"
+                onchange="updateGeneratedDM()"
+                class="w-full bg-obsidian hairline-border px-3.5 py-2.5 font-mono text-xs text-bone focus:border-vermilion outline-none"
+              >
+                <option value="Real Estate Brokerage">Real Estate Brokerage</option>
+                <option value="Wealth & Financial Advisory">Wealth & Financial Advisory</option>
+                <option value="Commercial Real Estate">Commercial Real Estate</option>
+                <option value="High-Ticket B2B Agency">High-Ticket B2B Agency</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block font-mono text-[11px] text-titanium uppercase mb-1.5">PRIMARY SYSTEM BOTTLENECK</label>
+            <select
+              id="dm-sender-goal"
+              onchange="updateGeneratedDM()"
+              class="w-full bg-obsidian hairline-border px-3.5 py-2.5 font-mono text-xs text-bone focus:border-vermilion outline-none"
+            >
+              <option value="60s AI Avatar Twin + Automated Video Outreach">60s AI Avatar Twin + Automated Video Outreach</option>
+              <option value="Sub-10s Make.com + Voiceflow Lead Qualification">Sub-10s Make.com + Voiceflow Lead Qualification</option>
+              <option value="Full Foyer AI Stack (Avatar Clone + Autonomous Setter)">Full Foyer AI Stack (Avatar Clone + Autonomous Setter)</option>
+            </select>
+          </div>
+
+          <div class="mb-6">
+            <label class="block font-mono text-[11px] text-titanium uppercase mb-1.5">GENERATED TRANSMISSION PAYLOAD</label>
+            <textarea
+              id="dm-preview-box"
+              rows="4"
+              readonly
+              class="w-full bg-obsidian hairline-border p-3.5 font-mono text-xs text-acid leading-relaxed outline-none resize-none"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3">
+          <button
+            onclick="copyAndOpenLinkedIn(false)"
+            class="flex-1 bg-obsidian hover:bg-surfaceHigh text-bone hairline-border font-mono text-xs font-bold uppercase py-3.5 px-4 transition-colors cursor-pointer"
+          >
+            [COPY DM PAYLOAD]
+          </button>
+          <button
+            onclick="copyAndOpenLinkedIn(true)"
+            class="flex-1 bg-vermilion hover:bg-acid text-obsidian font-mono text-xs font-bold uppercase py-3.5 px-4 transition-colors cursor-pointer"
+          >
+            [COPY &amp; MESSAGE ALFEZ ON LINKEDIN ↗]
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Architectural Colophon -->
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-titanium">
+      <div>
+        © <span id="footer-year">2026</span> ALFEZ KHAN (ALFIE) // FOYER AI. ALL SYSTEMS OPERATIONAL.
+      </div>
+      <div class="flex items-center gap-6">
+        <button onclick="toggleLinkedInDrawer(true)" class="hover:text-vermilion uppercase cursor-pointer">[CUSTOMIZE LINKEDIN DATA]</button>
+        <a href="https://www.linkedin.com/in/alfezkhan-ai/" target="_blank" rel="noopener noreferrer" class="hover:text-bone uppercase">LINKEDIN ↗</a>
+        <a href="#hero" class="hover:text-acid uppercase">[TOP ↑]</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       8. MODAL FOR CASE STUDY ARCHITECTURAL SPECIFICATIONS
+       ===================================================================== -->
+  <div
+    id="system-modal"
+    class="fixed inset-0 z-[100] bg-obsidian/85 backdrop-blur-md hidden items-center justify-center p-4 sm:p-6"
+  >
+    <div class="bg-surface hairline-border max-w-3xl w-full p-6 sm:p-10 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 hairline-b mb-6">
+        <span id="modal-sys-code" class="font-mono text-xs text-vermilion font-bold uppercase">SYS-01 // ARCHITECTURE BLUEPRINT</span>
+        <button
+          onclick="closeSystemModal()"
+          class="font-mono text-xs text-titanium hover:text-bone px-3 py-1 bg-obsidian hairline-border cursor-pointer"
+        >
+          [ESC / CLOSE ✕]
+        </button>
+      </div>
+
+      <h3 id="modal-sys-title" class="font-syne text-2xl sm:text-4xl font-extrabold text-bone uppercase mb-4"></h3>
+      <p id="modal-sys-summary" class="text-titanium text-sm sm:text-base leading-relaxed mb-6"></p>
+
+      <div class="mb-6">
+        <div class="font-mono text-xs text-acid uppercase mb-2">TECHNICAL EXECUTION FLOW</div>
+        <div id="modal-sys-steps" class="space-y-2.5 font-mono text-xs text-bone bg-obsidian p-4 hairline-border"></div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        <div class="p-4 bg-obsidian hairline-border">
+          <div class="font-mono text-[10px] text-titanium uppercase">PRIMARY STACK</div>
+          <div id="modal-sys-stack" class="font-mono text-xs text-bone font-bold mt-1"></div>
+        </div>
+        <div class="p-4 bg-obsidian hairline-border">
+          <div class="font-mono text-[10px] text-titanium uppercase">VERIFIED IMPACT</div>
+          <div id="modal-sys-impact" class="font-mono text-xs text-acid font-bold mt-1"></div>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-3 pt-4 hairline-t">
+        <button
+          onclick="closeSystemModal()"
+          class="px-5 py-3 bg-obsidian hairline-border font-mono text-xs text-titanium hover:text-bone uppercase cursor-pointer"
+        >
+          [CLOSE WINDOW]
+        </button>
+        <a
+          href="https://www.linkedin.com/in/alfezkhan-ai/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-6 py-3 bg-vermilion hover:bg-acid text-obsidian font-mono text-xs font-bold uppercase transition-colors"
+        >
+          [REQUEST THIS ARCHITECTURE ON LINKEDIN ↗]
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       9. SLIDE-OVER DRAWER: [⚡ IMPORT / CUSTOMIZE LINKEDIN DATA]
+       ===================================================================== -->
+  <div
+    id="linkedin-drawer-backdrop"
+    onclick="toggleLinkedInDrawer(false)"
+    class="fixed inset-0 z-[110] bg-obsidian/80 backdrop-blur-sm hidden transition-opacity"
+  ></div>
+
+  <aside
+    id="linkedin-drawer"
+    class="fixed top-0 right-0 bottom-0 z-[115] w-full max-w-xl bg-surface hairline-l transform translate-x-full transition-transform duration-300 flex flex-col justify-between overflow-y-auto"
+  >
+    <div class="p-6 sm:p-8 space-y-6">
+      <div class="flex items-center justify-between pb-4 hairline-b">
+        <div>
+          <span class="font-mono text-[11px] text-acid uppercase font-bold">LIVE DOM + LOCALSTORAGE ENGINE</span>
+          <h3 class="font-syne text-2xl font-extrabold text-bone uppercase mt-0.5">LINKEDIN PROFILE SYNC</h3>
+        </div>
+        <button
+          onclick="toggleLinkedInDrawer(false)"
+          class="px-3 py-1.5 bg-obsidian hairline-border font-mono text-xs text-titanium hover:text-bone cursor-pointer"
+        >
+          [CLOSE ✕]
+        </button>
+      </div>
+
+      <!-- Raw LinkedIn Text Auto-Parser -->
+      <div class="p-4 bg-obsidian hairline-border space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-xs text-vermilion font-bold uppercase">OPTION A: PASTE RAW LINKEDIN PROFILE TEXT</span>
+          <button
+            onclick="parseRawLinkedInText()"
+            class="px-3 py-1 bg-vermilion text-obsidian font-mono text-[11px] font-bold uppercase hover:bg-acid transition-colors cursor-pointer"
+          >
+            [AUTO-PARSE TEXT ⚡]
+          </button>
+        </div>
+        <p class="font-mono text-[11px] text-titanium">
+          Select all text on your LinkedIn profile (`Ctrl+A` / `Cmd+A`), paste it below, and click Auto-Parse to extract your headline &amp; summary automatically.
+        </p>
+        <textarea
+          id="raw-linkedin-dump"
+          rows="3"
+          placeholder="Paste raw copied text from https://www.linkedin.com/in/alfezkhan-ai/ here..."
+          class="w-full bg-surface hairline-border p-3 font-mono text-xs text-bone focus:border-vermilion outline-none"
+        ></textarea>
+      </div>
+
+      <!-- Structured Field Editor -->
+      <div class="space-y-4">
+        <div class="font-mono text-xs text-acid font-bold uppercase">OPTION B: DIRECT TELEMETRY FIELD OVERRIDE</div>
+
+        <div>
+          <label class="block font-mono text-[11px] text-titanium uppercase mb-1">NAME &amp; VENTURE HEADER</label>
+          <input id="edit-brand" type="text" class="w-full bg-obsidian hairline-border px-3.5 py-2.5 font-mono text-xs text-bone focus:border-vermilion outline-none" />
+        </div>
+
+        <div>
+          <label class="block font-mono text-[11px] text-titanium uppercase mb-1">LINKEDIN EYEBROW / HEADLINE</label>
+          <input id="edit-eyebrow" type="text" class="w-full bg-obsidian hairline-border px-3.5 py-2.5 font-mono text-xs text-bone focus:border-vermilion outline-none" />
+        </div>
+
+        <div>
+          <label class="block font-mono text-[11px] text-titanium uppercase mb-1">HERO MONUMENTAL HEADLINE</label>
+          <input id="edit-headline" type="text" class="w-full bg-obsidian hairline-border px-3.5 py-2.5 font-mono text-xs text-bone focus:border-vermilion outline-none" />
+        </div>
+
+        <div>
+          <label class="block font-mono text-[11px] text-titanium uppercase mb-1">HERO SUBHEADLINE</label>
+          <textarea id="edit-subheadline" rows="2" class="w-full bg-obsidian hairline-border p-3 font-mono text-xs text-bone focus:border-vermilion outline-none"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-mono text-[11px] text-titanium uppercase mb-1">ABOUT / ARCHITECT BIO</label>
+          <textarea id="edit-bio" rows="3" class="w-full bg-obsidian hairline-border p-3 font-mono text-xs text-bone focus:border-vermilion outline-none"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-mono text-[11px] text-titanium uppercase mb-1">LINKEDIN PROFILE URL</label>
+          <input id="edit-linkedin-url" type="url" class="w-full bg-obsidian hairline-border px-3.5 py-2.5 font-mono text-xs text-bone focus:border-vermilion outline-none" />
+        </div>
+      </div>
+    </div>
+
+    <div class="p-6 sm:p-8 hairline-t bg-obsidian flex flex-wrap items-center justify-between gap-3">
+      <button
+        onclick="resetProfileData()"
+        class="px-4 py-3 hairline-border font-mono text-xs text-titanium hover:text-vermilion uppercase cursor-pointer"
+      >
+        [RESET DEFAULTS]
+      </button>
+      <button
+        onclick="saveProfileCustomization()"
+        class="flex-1 bg-acid hover:bg-vermilion text-obsidian font-mono text-xs font-bold uppercase py-3 px-6 transition-colors cursor-pointer"
+      >
+        [SAVE &amp; APPLY TO LIVE DOM ✓]
+      </button>
+    </div>
+  </aside>
+
+  <!-- =====================================================================
+       JAVASCRIPT ENGINE: THREE.JS KINETIC CORE, SIMULATOR, ROI & CUSTOMIZER
+       ===================================================================== -->
+  <script>
+    /* ---------------------------------------------------------------------
+       0. DEFAULT PROFILE STATE (ALFEZ KHAN // FOYER AI)
+       --------------------------------------------------------------------- */
+    const DEFAULT_PROFILE = {
+      brand: "[ALFEZ KHAN // FOYER AI]",
+      eyebrow: "FOUNDER @ FOYER AI // AI VIDEO & AUTONOMOUS LEAD SYSTEMS",
+      headline: "WE CLONE BROKERS & AUTOMATE PIPELINES THAT CLOSE.",
+      subheadline: "I build 60-second AI avatar video engines and sub-10-second automated lead follow-up architectures for Real Estate Brokers & Financial Advisors. Zero filming. Zero dead leads.",
+      bio: "At Foyer AI, I engineer two interconnected revenue weapons: hyper-realistic 60-second AI video clones that publish daily authority content & personalized video DMs without you ever recording a take, paired with deterministic Make.com, n8n, Voiceflow, and Twilio webhook pipelines that ingest, score, and book appointments with leads in under 8 seconds.",
+      linkedinUrl: "https://www.linkedin.com/in/alfezkhan-ai/"
+    };
+
+    let currentProfile = { ...DEFAULT_PROFILE };
+
+    function showToast(message) {
+      const toast = document.getElementById('hud-toast');
+      const text = document.getElementById('hud-toast-text');
+      text.textContent = message;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 3200);
+    }
+
+    /* ---------------------------------------------------------------------
+       1. LIVE IST CLOCK IN TOP TELEMETRY BAR
+       --------------------------------------------------------------------- */
+    function updateISTClock() {
+      const now = new Date();
+      const options = {
+        timeZone: 'Asia/Kolkata',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      };
+      const timeString = new Intl.DateTimeFormat('en-GB', options).format(now);
+      const clockEl = document.getElementById('ist-clock');
+      if (clockEl) clockEl.textContent = `IST ${timeString}`;
+    }
+    setInterval(updateISTClock, 1000);
+    updateISTClock();
+
+    /* ---------------------------------------------------------------------
+       2. THREE.JS WEBGL INTERACTIVE 3D KINETIC TENSOR CORE
+       --------------------------------------------------------------------- */
+    let scene, camera, renderer;
+    let outerCage, innerKnot, ringGroup, particleSystem;
+    let baseInnerPositions = null;
+    let currentShaderMode = 1;
+    let tensorFrequency = 0.38;
+    let isDragging = false;
+    let prevMouse = { x: 0, y: 0 };
+    let targetRotation = { x: 0.35, y: 0.65 };
+    let scrollRotationOffset = 0;
+
+    function initThreeJS() {
+      const container = document.getElementById('webgl-container');
+      if (!container || typeof THREE === 'undefined') return;
+
+      const width = container.clientWidth || 500;
+      const height = container.clientHeight || 520;
+
+      scene = new THREE.Scene();
+
+      camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 1000);
+      camera.position.z = 6.2;
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.innerHTML = '';
+      container.appendChild(renderer.domElement);
+
+      // Architectural Lighting for Chrome Monolith Mode
+      const ambientLight = new THREE.AmbientLight(0xf2efe9, 0.45);
+      scene.add(ambientLight);
+
+      const dirLight1 = new THREE.DirectionalLight(0xff3b1d, 2.4);
+      dirLight1.position.set(5, 5, 4);
+      scene.add(dirLight1);
+
+      const dirLight2 = new THREE.DirectionalLight(0xccff00, 1.5);
+      dirLight2.position.set(-5, -4, 3);
+      scene.add(dirLight2);
+
+      // 1. Outer Geodesic Icosahedron Cage
+      const cageGeo = new THREE.IcosahedronGeometry(2.05, 1);
+      const cageMat = new THREE.MeshBasicMaterial({
+        color: 0xf2efe9,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.25
+      });
+      outerCage = new THREE.Mesh(cageGeo, cageMat);
+      scene.add(outerCage);
+
+      // 2. Inner Morphing TorusKnot Tensor Core
+      const knotGeo = new THREE.TorusKnotGeometry(0.95, 0.28, 128, 24, 2, 3);
+      baseInnerPositions = knotGeo.attributes.position.array.slice();
+
+      const knotMat = new THREE.MeshStandardMaterial({
+        color: 0xff3b1d,
+        emissive: 0x220500,
+        metalness: 0.85,
+        roughness: 0.2,
+        wireframe: true
+      });
+      innerKnot = new THREE.Mesh(knotGeo, knotMat);
+      scene.add(innerKnot);
+
+      // 3. Orbiting Telemetry Rings
+      ringGroup = new THREE.Group();
+      const ringGeo1 = new THREE.TorusGeometry(2.45, 0.012, 12, 100);
+      const ringMat1 = new THREE.MeshBasicMaterial({ color: 0xff3b1d, transparent: true, opacity: 0.65 });
+      const ring1 = new THREE.Mesh(ringGeo1, ringMat1);
+      ring1.rotation.x = Math.PI / 2.6;
+      ringGroup.add(ring1);
+
+      const ringGeo2 = new THREE.TorusGeometry(2.72, 0.01, 12, 100);
+      const ringMat2 = new THREE.MeshBasicMaterial({ color: 0xccff00, transparent: true, opacity: 0.45 });
+      const ring2 = new THREE.Mesh(ringGeo2, ringMat2);
+      ring2.rotation.y = Math.PI / 3.2;
+      ringGroup.add(ring2);
+
+      scene.add(ringGroup);
+
+      // 4. Floating Data Field Particles
+      const particleCount = 320;
+      const pGeo = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount * 3; i += 3) {
+        const radius = 2.2 + Math.random() * 1.8;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+        positions[i] = radius * Math.sin(phi) * Math.cos(theta);
+        positions[i + 1] = radius * Math.sin(phi) * Math.sin(theta);
+        positions[i + 2] = radius * Math.cos(phi);
+      }
+      pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const pMat = new THREE.PointsMaterial({
+        color: 0xccff00,
+        size: 0.035,
+        transparent: true,
+        opacity: 0.75
+      });
+      particleSystem = new THREE.Points(pGeo, pMat);
+      scene.add(particleSystem);
+
+      // Pointer & Touch Orbit Events
+      container.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        prevMouse = { x: e.clientX, y: e.clientY };
+      });
+      window.addEventListener('mouseup', () => { isDragging = false; });
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) {
+          // Subtle parallax even when not dragging
+          targetRotation.y += (e.movementX || 0) * 0.0005;
+          return;
+        }
+        const dx = e.clientX - prevMouse.x;
+        const dy = e.clientY - prevMouse.y;
+        targetRotation.y += dx * 0.008;
+        targetRotation.x += dy * 0.008;
+        prevMouse = { x: e.clientX, y: e.clientY };
+      });
+
+      container.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          isDragging = true;
+          prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+      }, { passive: true });
+      window.addEventListener('touchend', () => { isDragging = false; });
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging || e.touches.length !== 1) return;
+        const dx = e.touches[0].clientX - prevMouse.x;
+        const dy = e.touches[0].clientY - prevMouse.y;
+        targetRotation.y += dx * 0.008;
+        targetRotation.x += dy * 0.008;
+        prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }, { passive: true });
+
+      window.addEventListener('scroll', () => {
+        scrollRotationOffset = window.scrollY * 0.0018;
+      }, { passive: true });
+
+      window.addEventListener('resize', onWindowResize);
+    }
+
+    function onWindowResize() {
+      const container = document.getElementById('webgl-container');
+      if (!container || !renderer || !camera) return;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    }
+
+    // Switch between 3 Distinct Architectural Shader Modes
+    function setShaderMode(mode) {
+      currentShaderMode = mode;
+      const label = document.getElementById('active-shader-label');
+
+      [1, 2, 3].forEach((idx) => {
+        const btn = document.getElementById(`shader-btn-${idx}`);
+        if (idx === mode) {
+          btn.className = "shader-btn bg-vermilion text-obsidian font-mono text-[11px] font-bold py-2 px-2 uppercase tracking-wider transition-all border border-vermilion cursor-pointer";
+        } else {
+          btn.className = "shader-btn bg-surface/90 text-bone hover:border-bone font-mono text-[11px] py-2 px-2 uppercase tracking-wider transition-all hairline-border cursor-pointer";
+        }
+      });
+
+      if (!innerKnot || !outerCage || !particleSystem) return;
+
+      if (mode === 1) {
+        label.textContent = "MODE 01 // DUAL WIREFRAME";
+        innerKnot.material.wireframe = true;
+        innerKnot.material.color.setHex(0xff3b1d);
+        outerCage.material.opacity = 0.25;
+        particleSystem.material.size = 0.035;
+      } else if (mode === 2) {
+        label.textContent = "MODE 02 // CHROME MONOLITH";
+        innerKnot.material.wireframe = false;
+        innerKnot.material.color.setHex(0xf2efe9);
+        innerKnot.material.metalness = 0.92;
+        innerKnot.material.roughness = 0.14;
+        outerCage.material.opacity = 0.12;
+        particleSystem.material.size = 0.025;
+      } else if (mode === 3) {
+        label.textContent = "MODE 03 // VORTEX MATRIX";
+        innerKnot.material.wireframe = true;
+        innerKnot.material.color.setHex(0xccff00);
+        outerCage.material.opacity = 0.45;
+        particleSystem.material.size = 0.065;
+      }
+    }
+
+    function updateTensorFrequency(val) {
+      tensorFrequency = parseFloat(val) / 100;
+      document.getElementById('tensor-freq-val').textContent = `${val}Hz`;
+    }
+
+    let clockTime = 0;
+    function animateThreeJS() {
+      requestAnimationFrame(animateThreeJS);
+      if (!renderer || !scene || !camera) return;
+
+      clockTime += 0.012 + tensorFrequency * 0.025;
+
+      // Real-time procedural vertex displacement on the inner TorusKnot
+      if (innerKnot && baseInnerPositions) {
+        const posAttr = innerKnot.geometry.attributes.position;
+        const arr = posAttr.array;
+        const amp = tensorFrequency * 0.22;
+
+        for (let i = 0; i < arr.length; i += 3) {
+          const bx = baseInnerPositions[i];
+          const by = baseInnerPositions[i + 1];
+          const bz = baseInnerPositions[i + 2];
+          const wave = Math.sin(bx * 3.0 + clockTime * 2.2) * Math.cos(by * 3.0 + clockTime * 1.8) * amp;
+          arr[i] = bx + bx * wave;
+          arr[i + 1] = by + by * wave;
+          arr[i + 2] = bz + bz * wave;
+        }
+        posAttr.needsUpdate = true;
+      }
+
+      targetRotation.y += 0.0035;
+
+      if (innerKnot) {
+        innerKnot.rotation.x += (targetRotation.x + scrollRotationOffset - innerKnot.rotation.x) * 0.08;
+        innerKnot.rotation.y += (targetRotation.y + scrollRotationOffset - innerKnot.rotation.y) * 0.08;
+      }
+      if (outerCage) {
+        outerCage.rotation.x = -innerKnot.rotation.x * 0.6;
+        outerCage.rotation.y = -innerKnot.rotation.y * 0.6;
+      }
+      if (ringGroup) {
+        ringGroup.rotation.z = clockTime * 0.35;
+        ringGroup.rotation.x = Math.sin(clockTime * 0.4) * 0.35;
+      }
+      if (particleSystem) {
+        particleSystem.rotation.y = clockTime * 0.18;
+      }
+
+      // Live Telemetry Overlay Update
+      const coordsEl = document.getElementById('webgl-coords');
+      if (coordsEl && innerKnot) {
+        coordsEl.textContent = `ROT_X: ${innerKnot.rotation.x.toFixed(2)} | ROT_Y: ${innerKnot.rotation.y.toFixed(2)} | FREQ: ${Math.round(tensorFrequency * 100)}Hz`;
+      }
+
+      renderer.render(scene, camera);
+    }
+
+    /* ---------------------------------------------------------------------
+       3. INTERACTIVE LIVE SYSTEM PIPELINE SIMULATOR
+       --------------------------------------------------------------------- */
+    const PIPELINE_SCENARIOS = {
+      penthouse: {
+        leadName: "Julian Sterling",
+        asset: "$4.2M Brickell Penthouse",
+        source: "Meta Luxury Lead Ad",
+        budget: "$4,200,000 Cash/Pre-Approved",
+        timeline: "Immediate (Within 30 Days)"
+      },
+      wealth: {
+        leadName: "Dr. Elena Rostova",
+        asset: "$2.5M 401(k) & Equity Rollover",
+        source: "LinkedIn Executive Outbound",
+        budget: "$2,500,000 AUM",
+        timeline: "Q4 Tax Rebalancing"
+      },
+      commercial: {
+        leadName: "Vanguard Capital Partners",
+        asset: "$8.9M 42-Unit Multi-Family",
+        source: "LoopNet / Direct Portal Webhook",
+        budget: "$8,900,000 1031 Exchange",
+        timeline: "45-Day Identification Window"
+      }
+    };
+
+    let currentScenarioKey = 'penthouse';
+    let selectedNodeIndex = 0;
+    let isSimulationRunning = false;
+
+    function getNodeSpecs(scenarioKey) {
+      const s = PIPELINE_SCENARIOS[scenarioKey];
+      return [
+        {
+          tag: "NODE 01 // WEBHOOK PAYLOAD INSPECTOR",
+          title: "META ADS / MLS PROPERTY INGESTION",
+          stack: "MAKE.COM + REST WEBHOOKS",
+          outcome: "Zero manual CSV exports. Every lead enters the qualification pipeline within 120ms of form submit.",
+          json: {
+            event: "lead.captured.webhook",
+            timestamp_ms: Date.now(),
+            prospect: {
+              full_name: s.leadName,
+              intent_asset: s.asset,
+              acquisition_channel: s.source,
+              verified_phone: "+1 (305) 890-4419"
+            },
+            routing_target: "foyer_ai_make_router_v4"
+          }
+        },
+        {
+          tag: "NODE 02 // AI QUALIFICATION ENGINE",
+          title: "N8N + CLAUDE 3.7 INTENT & BUDGET SCORING",
+          stack: "N8N + CLAUDE API + CLEARBIT",
+          outcome: "Eliminates tire-kickers automatically and drafts a hyper-specific script for the broker's AI twin.",
+          json: {
+            qualification_status: "HIGH_PRIORITY_VIP",
+            lead_score: 96,
+            verified_liquidity: s.budget,
+            closing_horizon: s.timeline,
+            synthesized_hook: `Hey ${s.leadName.split(' ')[0]}, saw your inquiry on the ${s.asset}—I just pulled the private comps for you.`
+          }
+        },
+        {
+          tag: "NODE 03 // AVATAR VIDEO SYNTHESIS",
+          title: "60-SECOND 4K AI BROKER TWIN RENDER",
+          stack: "HEYGEN API + ELEVENLABS VOICE",
+          outcome: "Delivers face-to-face trust at scale with zero filming time required from the broker or advisor.",
+          json: {
+            engine: "foyer_avatar_twin_v2.4",
+            avatar_profile: "broker_4k_studio_clone",
+            voice_clone_stability: 0.94,
+            dynamic_variables: {
+              first_name: s.leadName.split(' ')[0],
+              target_deal: s.asset
+            },
+            render_output_url: "https://cdn.foyer.ai/v/personalized_twin_4k.mp4"
+          }
+        },
+        {
+          tag: "NODE 04 // OMNICHANNEL DISPATCH & BOOKING",
+          title: "TWILIO + WHATSAPP + VOICEFLOW SETTER",
+          stack: "TWILIO + VOICEFLOW + CAL.COM",
+          outcome: "Engages the prospect while they are still holding their phone, locking in a calendar booking in < 8 seconds.",
+          json: {
+            dispatch_channels: ["Twilio_MMS_Video", "WhatsApp_Business_API"],
+            total_pipeline_latency_sec: 6.4,
+            voiceflow_agent_state: "AWAITING_CALENDAR_SLOT_CONFIRMATION",
+            calendar_hold: "Tomorrow @ 2:00 PM EST (Confirmed)"
+          }
+        }
+      ];
+    }
+
+    function inspectNode(index) {
+      selectedNodeIndex = index;
+      const specs = getNodeSpecs(currentScenarioKey)[index];
+
+      for (let i = 0; i < 4; i++) {
+        const card = document.getElementById(`sim-node-${i}`);
+        if (i === index) {
+          card.classList.add('node-selected');
+        } else {
+          card.classList.remove('node-selected');
+        }
+      }
+
+      document.getElementById('inspector-node-tag').textContent = specs.tag;
+      document.getElementById('inspector-node-title').textContent = specs.title;
+      document.getElementById('inspector-stack-badge').textContent = specs.stack;
+      document.getElementById('inspector-outcome').textContent = specs.outcome;
+      document.getElementById('inspector-json-box').textContent = JSON.stringify(specs.json, null, 2);
+    }
+
+    function changePayloadPreset(val) {
+      currentScenarioKey = val;
+      inspectNode(selectedNodeIndex);
+      runPipelineSimulation();
+    }
+
+    function copyInspectorJson() {
+      const text = document.getElementById('inspector-json-box').textContent;
+      copyTextToClipboard(text);
+      showToast("NODE JSON PAYLOAD COPIED TO CLIPBOARD");
+    }
+
+    function appendTerminalLog(timeOffset, tag, message, colorClass = "text-bone") {
+      const container = document.getElementById('pipeline-terminal-logs');
+      const line = document.createElement('div');
+      line.className = "flex items-start gap-2.5 border-l-2 border-bone/20 pl-3 py-0.5";
+      line.innerHTML = `
+        <span class="text-titanium whitespace-nowrap">[+${timeOffset}s]</span>
+        <span class="text-vermilion font-bold whitespace-nowrap">${tag}</span>
+        <span class="${colorClass}">${message}</span>
+      `;
+      container.appendChild(line);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function runPipelineSimulation() {
+      if (isSimulationRunning) return;
+      isSimulationRunning = true;
+
+      const s = PIPELINE_SCENARIOS[currentScenarioKey];
+      const terminal = document.getElementById('pipeline-terminal-logs');
+      const statusText = document.getElementById('terminal-status-text');
+      const btnLabel = document.getElementById('run-btn-label');
+
+      terminal.innerHTML = '';
+      statusText.textContent = "EXECUTING LIVE PAYLOAD...";
+      statusText.className = "text-vermilion";
+      btnLabel.textContent = "SIMULATING PIPELINE...";
+
+      for (let i = 0; i < 4; i++) {
+        document.getElementById(`sim-node-${i}`).classList.remove('node-running');
+      }
+
+      const steps = [
+        {
+          delay: 100,
+          node: 0,
+          time: "0.12",
+          tag: "[WEBHOOK]",
+          msg: `Ingested POST payload for ${s.leadName} (${s.asset}) via ${s.source}.`,
+          color: "text-bone"
+        },
+        {
+          delay: 850,
+          node: 1,
+          time: "1.57",
+          tag: "[N8N+LLM]",
+          msg: `Qualified budget (${s.budget}). Lead Score: 96/100. Routing to VIP Avatar Queue.`,
+          color: "text-acid"
+        },
+        {
+          delay: 1750,
+          node: 2,
+          time: "4.77",
+          tag: "[HEYGEN_4K]",
+          msg: `Synthesized personalized 60s AI Broker Twin video addressing "${s.leadName.split(' ')[0]}".`,
+          color: "text-bone"
+        },
+        {
+          delay: 2650,
+          node: 3,
+          time: "6.40",
+          tag: "[TWILIO+VF]",
+          msg: `Dispatched video SMS + WhatsApp. Voiceflow agent booked discovery call!`,
+          color: "text-acid font-bold"
+        }
+      ];
+
+      steps.forEach((step, idx) => {
+        setTimeout(() => {
+          for (let i = 0; i < 4; i++) {
+            document.getElementById(`sim-node-${i}`).classList.remove('node-running');
+          }
+          const activeCard = document.getElementById(`sim-node-${step.node}`);
+          activeCard.classList.add('node-running');
+          inspectNode(step.node);
+          appendTerminalLog(step.time, step.tag, step.msg, step.color);
+
+          if (idx === steps.length - 1) {
+            setTimeout(() => {
+              activeCard.classList.remove('node-running');
+              statusText.textContent = "EXECUTION COMPLETE // APPOINTMENT BOOKED IN 6.40s";
+              statusText.className = "text-acid";
+              btnLabel.textContent = "RUN LIVE LEAD PAYLOAD";
+              isSimulationRunning = false;
+            }, 600);
+          }
+        }, step.delay);
+      });
+    }
+
+    /* ---------------------------------------------------------------------
+       4. 3D PERSPECTIVE TILT EFFECT & SPECIFICATION MODALS
+       --------------------------------------------------------------------- */
+    function init3DTiltCards() {
+      const cards = document.querySelectorAll('.tilt-card');
+      cards.forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const rotateX = ((y - centerY) / centerY) * -5.5;
+          const rotateY = ((x - centerX) / centerX) * 5.5;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        });
+      });
+    }
+
+    const SYSTEM_MODAL_DATA = [
+      {
+        code: "SYS-01 // FLAGSHIP AI TWIN ENGINE",
+        title: "FOYER AI — 60s AI AVATAR OUTBOUND & AUTHORITY ENGINE",
+        summary: "Built specifically for time-poor Real Estate Brokers and Financial Advisors who want omnipresent video authority and high-converting personalized video DMs without ever setting up lights, teleprompters, or cameras.",
+        steps: [
+          "01. Single 3-minute studio calibration footage trains your custom 4K HeyGen + ElevenLabs vocal/visual twin.",
+          "02. Automated industry trend scraper drafts high-converting 60-second scripts tailored to local market shifts.",
+          "03. Make.com + n8n pipeline renders 4K vertical video assets and triggers personalized video DMs to high-value prospects."
+        ],
+        stack: "HeyGen Enterprise API • ElevenLabs Voice Clone • Make.com • CapCut / VN Pipeline",
+        impact: "0 Hours Filming / Week • 4.2x Reply Rate on LinkedIn & SMS Outreach"
+      },
+      {
+        code: "SYS-02 // DETERMINISTIC WEBHOOK ROUTER",
+        title: "REAL ESTATE JSON LEAD QUALIFICATION ENGINE",
+        summary: "Eliminates lead leakage across Meta Lead Ads, Zillow, Realtor.com, and custom landing pages by validating, enriching, and routing raw JSON payloads in milliseconds.",
+        steps: [
+          "01. Instant webhook listener captures raw form submissions and normalizes phone/email schemas.",
+          "02. Dynamic JSON router evaluates budget brackets, pre-approval status, and geographic territory.",
+          "03. Pushes structured deal cards directly into CRM and triggers instant broker SMS telemetry."
+        ],
+        stack: "Make.com Scenarios • Custom JSON Webhooks • REST APIs • CRM Sync",
+        impact: "100% Data Hygiene • Sub-1-Second Lead Triage & Territory Assignment"
+      },
+      {
+        code: "SYS-03 // CONVERSATIONAL AI SETTER",
+        title: "VOICEFLOW + TWILIO + N8N AUTONOMOUS APPOINTMENT SETTER",
+        summary: "A multi-turn conversational agent engineered to engage inbound and dormant leads over SMS and WhatsApp within 6 seconds, qualifying intent and booking directly onto your calendar.",
+        steps: [
+          "01. Twilio webhook initiates contextual SMS/WhatsApp message referencing the exact property or portfolio inquiry.",
+          "02. Voiceflow dialogue manager handles multi-turn Q&A (rates, neighborhood comps, minimum AUM).",
+          "03. n8n syncs live calendar availability and confirms the discovery call with automated reminders."
+        ],
+        stack: "Voiceflow • Twilio Programmable SMS • n8n • OpenAI / Claude API",
+        impact: "6.4s Speed-to-Lead • 24/7 Autonomous Qualification & Calendar Booking"
+      },
+      {
+        code: "SYS-04 // HIGH-VELOCITY MEDIA & MACRO ENGINE",
+        title: "GOOGLE VIDS + CAPCUT + CORELDRAW VBA ASSET PIPELINE",
+        summary: "Industrialized graphic and video production system that merges modern AI video editors with custom Visual Basic for Applications (VBA) macros in CorelDRAW and Canva.",
+        steps: [
+          "01. Structured data spreadsheets feed property specs and market stats into custom CorelDRAW VBA scripts.",
+          "02. Batch-generates hundreds of print-ready and social-ready luxury branding assets in seconds.",
+          "03. Google Vids, CapCut, and VN Editor templates assemble high-retention reels with kinetic typography."
+        ],
+        stack: "CorelDRAW VBA Macros • Google Vids • CapCut • VN Editor • Canva Bulk API",
+        impact: "10x Faster Creative Turnaround • Zero Repetitive Manual Design Work"
+      }
+    ];
+
+    function openSystemModal(index) {
+      const data = SYSTEM_MODAL_DATA[index];
+      document.getElementById('modal-sys-code').textContent = data.code;
+      document.getElementById('modal-sys-title').textContent = data.title;
+      document.getElementById('modal-sys-summary').textContent = data.summary;
+      document.getElementById('modal-sys-stack').textContent = data.stack;
+      document.getElementById('modal-sys-impact').textContent = data.impact;
+
+      const stepsBox = document.getElementById('modal-sys-steps');
+      stepsBox.innerHTML = data.steps.map(s => `<div class="py-1 border-b border-bone/10 last:border-none">${s}</div>`).join('');
+
+      const modal = document.getElementById('system-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeSystemModal() {
+      const modal = document.getElementById('system-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeSystemModal();
+        toggleLinkedInDrawer(false);
+      }
+    });
+
+    /* ---------------------------------------------------------------------
+       5. CLIENT ROI & TIME-RECLAIMED CALCULATOR
+       --------------------------------------------------------------------- */
+    function calculateROI() {
+      const leads = parseInt(document.getElementById('roi-leads').value, 10);
+      const commission = parseInt(document.getElementById('roi-commission').value, 10);
+      const weeklyHours = parseInt(document.getElementById('roi-hours').value, 10);
+
+      document.getElementById('roi-leads-display').textContent = `${leads.toLocaleString()} LEADS/MO`;
+      document.getElementById('roi-commission-display').textContent = `$${commission.toLocaleString()}`;
+      document.getElementById('roi-hours-display').textContent = `${weeklyHours} HRS/WK`;
+
+      // Conservative 2.2% recovered conversion lift from sub-8-second AI response + video twin trust
+      const annualLeads = leads * 12;
+      const recoveredDeals = Math.max(1, Math.round(annualLeads * 0.022));
+      const additionalPipeline = recoveredDeals * commission;
+      const hoursReclaimed = weeklyHours * 52;
+
+      document.getElementById('roi-output-pipeline').textContent = `+$${additionalPipeline.toLocaleString()}`;
+      document.getElementById('roi-output-deals').textContent = `EST. +${recoveredDeals} RECOVERED HIGH-INTENT CLOSINGS / YEAR`;
+      document.getElementById('roi-output-hours').textContent = `${hoursReclaimed.toLocaleString()} HRS/YR`;
+    }
+
+    /* ---------------------------------------------------------------------
+       6. DIRECT OUTREACH TERMINAL & CLIPBOARD ENGINE
+       --------------------------------------------------------------------- */
+    function updateGeneratedDM() {
+      const nameInput = document.getElementById('dm-sender-name').value.trim();
+      const niche = document.getElementById('dm-sender-niche').value;
+      const goal = document.getElementById('dm-sender-goal').value;
+
+      const senderLabel = nameInput ? nameInput : "[Your Name]";
+      const dmText = `Hey Alfie — just tested the live pipeline simulator on your Foyer AI portfolio. I run a ${niche} (${senderLabel}) and want to explore deploying a ${goal}. Open to a quick systems audit this week?`;
+
+      document.getElementById('dm-preview-box').value = dmText;
+    }
+
+    function copyTextToClipboard(text) {
+      const tempInput = document.createElement('textarea');
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+      } catch (err) {
+        console.error('Copy fallback error:', err);
+      }
+      document.body.removeChild(tempInput);
+    }
+
+    function copyAndOpenLinkedIn(shouldRedirect) {
+      const dmText = document.getElementById('dm-preview-box').value;
+      copyTextToClipboard(dmText);
+      showToast("AUDIT DM COPIED TO CLIPBOARD // READY TO PASTE ON LINKEDIN");
+
+      if (shouldRedirect) {
+        setTimeout(() => {
+          window.open(currentProfile.linkedinUrl, '_blank', 'noopener,noreferrer');
+        }, 450);
+      }
+    }
+
+    /* ---------------------------------------------------------------------
+       7. LINKEDIN DATA IMPORTER & LIVE DOM CUSTOMIZER (WITH LOCALSTORAGE)
+       --------------------------------------------------------------------- */
+    function toggleLinkedInDrawer(open) {
+      const drawer = document.getElementById('linkedin-drawer');
+      const backdrop = document.getElementById('linkedin-drawer-backdrop');
+      if (open) {
+        populateDrawerInputs();
+        backdrop.classList.remove('hidden');
+        drawer.classList.remove('translate-x-full');
+      } else {
+        backdrop.classList.add('hidden');
+        drawer.classList.add('translate-x-full');
+      }
+    }
+
+    function populateDrawerInputs() {
+      document.getElementById('edit-brand').value = currentProfile.brand;
+      document.getElementById('edit-eyebrow').value = currentProfile.eyebrow;
+      document.getElementById('edit-headline').value = currentProfile.headline;
+      document.getElementById('edit-subheadline').value = currentProfile.subheadline;
+      document.getElementById('edit-bio').value = currentProfile.bio;
+      document.getElementById('edit-linkedin-url').value = currentProfile.linkedinUrl;
+    }
+
+    function applyProfileToDOM(profile) {
+      document.getElementById('nav-brand-name').textContent = profile.brand;
+      document.getElementById('hero-eyebrow').textContent = profile.eyebrow;
+      document.getElementById('hero-headline').textContent = profile.headline;
+      document.getElementById('hero-subheadline').textContent = profile.subheadline;
+      document.getElementById('about-bio-secondary').textContent = profile.bio;
+
+      const heroCta = document.getElementById('hero-linkedin-cta');
+      const footerCta = document.getElementById('footer-linkedin-link');
+      if (heroCta) heroCta.href = profile.linkedinUrl;
+      if (footerCta) footerCta.href = profile.linkedinUrl;
+    }
+
+    function parseRawLinkedInText() {
+      const raw = document.getElementById('raw-linkedin-dump').value.trim();
+      if (!raw) {
+        showToast("PASTE YOUR COPIED LINKEDIN PROFILE TEXT FIRST");
+        return;
+      }
+
+      const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      if (lines.length >= 2) {
+        document.getElementById('edit-eyebrow').value = lines[1].toUpperCase().slice(0, 95);
+      }
+
+      // Look for an "About" section in the raw text dump
+      const aboutIdx = lines.findIndex(l => /^about$/i.test(l));
+      if (aboutIdx !== -1 && lines[aboutIdx + 1]) {
+        const extractedBio = lines.slice(aboutIdx + 1, aboutIdx + 4).join(' ');
+        document.getElementById('edit-bio').value = extractedBio;
+      } else if (lines.length > 3) {
+        document.getElementById('edit-bio').value = lines.slice(2, 5).join(' ');
+      }
+
+      showToast("LINKEDIN TEXT PARSED // REVIEW FIELDS & CLICK SAVE");
+    }
+
+    function saveProfileCustomization() {
+      currentProfile = {
+        brand: document.getElementById('edit-brand').value.trim() || DEFAULT_PROFILE.brand,
+        eyebrow: document.getElementById('edit-eyebrow').value.trim() || DEFAULT_PROFILE.eyebrow,
+        headline: document.getElementById('edit-headline').value.trim() || DEFAULT_PROFILE.headline,
+        subheadline: document.getElementById('edit-subheadline').value.trim() || DEFAULT_PROFILE.subheadline,
+        bio: document.getElementById('edit-bio').value.trim() || DEFAULT_PROFILE.bio,
+        linkedinUrl: document.getElementById('edit-linkedin-url').value.trim() || DEFAULT_PROFILE.linkedinUrl
+      };
+
+      try {
+        localStorage.setItem('foyer_ai_alfez_profile_v1', JSON.stringify(currentProfile));
+      } catch (e) {
+        console.warn('LocalStorage unavailable:', e);
+      }
+
+      applyProfileToDOM(currentProfile);
+      toggleLinkedInDrawer(false);
+      showToast("LIVE DOM & LOCALSTORAGE UPDATED SUCCESSFULLY");
+    }
+
+    function resetProfileData() {
+      currentProfile = { ...DEFAULT_PROFILE };
+      try {
+        localStorage.removeItem('foyer_ai_alfez_profile_v1');
+      } catch (e) {}
+      populateDrawerInputs();
+      applyProfileToDOM(currentProfile);
+      showToast("RESTORED DEFAULT FOYER AI TELEMETRY");
+    }
+
+    function loadSavedProfile() {
+      try {
+        const saved = localStorage.getItem('foyer_ai_alfez_profile_v1');
+        if (saved) {
+          currentProfile = { ...DEFAULT_PROFILE, ...JSON.parse(saved) };
+          applyProfileToDOM(currentProfile);
+        }
+      } catch (e) {}
+    }
+
+    /* ---------------------------------------------------------------------
+       8. INITIALIZATION ON WINDOW LOAD
+       --------------------------------------------------------------------- */
+    window.onload = function () {
+      loadSavedProfile();
+      initThreeJS();
+      animateThreeJS();
+      inspectNode(0);
+      runPipelineSimulation();
+      init3DTiltCards();
+      calculateROI();
+      updateGeneratedDM();
+    };
+  </script>
+</body>
+</html>
